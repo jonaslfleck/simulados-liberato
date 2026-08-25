@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import pdf from "pdf-parse";
+import pdf from "pdf-parse/lib/pdf-parse.js";
 export const runtime="nodejs";export const maxDuration=60;
 type Alternative={letter:string;content:string};type ExtractedQuestion={number:number;statement:string;alternatives:Alternative[];confidence:number};
 function extractQuestions(text:string):ExtractedQuestion[]{const questions:ExtractedQuestion[]=[];const qr=/(?:^|\n)\s*(\d{1,3})\s*[.)]\s+/g;const hits=[...text.matchAll(qr)];for(let i=0;i<hits.length;i++){const number=Number(hits[i][1]);if(number<1||number>100)continue;const start=(hits[i].index??0)+hits[i][0].length;const end=i+1<hits.length?(hits[i+1].index??text.length):text.length;const chunk=text.slice(start,end);const ar=/(?:^|\n)\s*([A-E])\s*[.)]\s+/gi;const alts=[...chunk.matchAll(ar)];if(alts.length<4)continue;const alternatives=alts.slice(0,5).map((m,j)=>({letter:m[1].toUpperCase(),content:chunk.slice((m.index??0)+m[0].length,j+1<alts.length?(alts[j+1].index??chunk.length):chunk.length).trim()}));const statement=chunk.slice(0,alts[0].index??0).trim();questions.push({number,statement,alternatives,confidence:alternatives.length===5&&statement.length>30?.98:.65})}return questions}
