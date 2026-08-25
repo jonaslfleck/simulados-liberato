@@ -1,0 +1,1 @@
+import Nav from "../../../components/Nav";import ExamRunner from "../../../components/ExamRunner";export default function Page(){return <><Nav/><ExamRunner/></>}

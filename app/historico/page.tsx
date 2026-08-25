@@ -1,0 +1,1 @@
+import Nav from "../../components/Nav";export default function Page(){return <><Nav/><main className="container"><h1>Histórico</h1><div className="card"><b>Nenhuma conta conectada.</b><p className="muted">Ao ativar o Supabase Auth, as tentativas e estatísticas passam a ser salvas por usuário.</p></div></main></>}

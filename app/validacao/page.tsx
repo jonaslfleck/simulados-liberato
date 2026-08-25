@@ -1,0 +1,3 @@
+import Nav from "../../components/Nav";
+const steps=["Fonte oficial cadastrada","PDF descoberto e baixado","Texto extraído","Imagens e gráficos extraídos","Questões separadas","Gabarito associado","Revisão humana","Publicado"];
+export default function Page(){return <><Nav/><main className="container"><h1>Validação do acervo</h1><div className="card"><h2>Fluxo V4</h2>{steps.map((x,i)=><p key={x}><b>{i+1}.</b> {x}</p>)}<p className="muted">Nenhuma questão deve aparecer como oficial no simulado antes da validação.</p></div></main></>}

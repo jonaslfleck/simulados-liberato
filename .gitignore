@@ -1,0 +1,11 @@
+.next/
+node_modules/
+.env
+.env.local
+.env.*.local
+data/raw/
+data/extracted/
+data/assets/
+data/review/queue.json
+*.pyc
+__pycache__/

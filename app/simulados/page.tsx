@@ -1,0 +1,2 @@
+import Link from "next/link";import Nav from "../../components/Nav";import {exams} from "../../lib/demo";
+export default function Page(){return <><Nav/><main className="container"><h1>Simulados</h1><p className="muted">O acervo publicado aparecerá aqui após a importação e validação.</p><div className="grid">{exams.map(e=><div className="card exam" key={e.year}><div><b>Processo Seletivo {e.year}</b><div className="muted">{e.shift} • {e.questions} questões</div></div><Link className="btn" href="/simulado/demo">Modo demonstração</Link></div>)}</div></main></>}

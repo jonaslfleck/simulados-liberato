@@ -1,0 +1,2 @@
+import Nav from "../../../components/Nav";
+export default function Page(){return <><Nav/><main className="container"><h1>Administração • Importação</h1><div className="card"><h2>Pipeline V2</h2><ol><li>Executar descoberta e download dos PDFs oficiais.</li><li>Extrair texto e separar questões.</li><li>Associar gabaritos.</li><li>Revisar itens com baixa confiança, imagens ou fórmulas.</li><li>Publicar no Supabase.</li></ol><p className="muted">A página é um painel informativo do MVP. A execução do importador ocorre no ambiente local/CI, não na Vercel.</p></div></main></>}

@@ -1,0 +1,6 @@
+create extension if not exists "pgcrypto";
+create table if not exists exams(id uuid primary key default gen_random_uuid(),year int not null,shift text not null,title text not null,source_url text not null,total_questions int,created_at timestamptz default now());
+create table if not exists questions(id uuid primary key default gen_random_uuid(),exam_id uuid references exams(id) on delete cascade,question_number int not null,subject text not null,statement text not null,image_url text,source_page int,unique(exam_id,question_number));
+create table if not exists alternatives(id uuid primary key default gen_random_uuid(),question_id uuid references questions(id) on delete cascade,letter char(1) not null,content text not null,is_correct boolean default false,unique(question_id,letter));
+create table if not exists attempts(id uuid primary key default gen_random_uuid(),user_id uuid,exam_id uuid references exams(id),started_at timestamptz default now(),finished_at timestamptz,score numeric,total_correct int default 0);
+create table if not exists answers(id uuid primary key default gen_random_uuid(),attempt_id uuid references attempts(id) on delete cascade,question_id uuid references questions(id),alternative_id uuid references alternatives(id),is_correct boolean,answered_at timestamptz default now(),unique(attempt_id,question_id));

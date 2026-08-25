@@ -1,0 +1,97 @@
+{
+  "source_page": "https://www.liberato.com.br/provas-e-gabaritos-processos-seletivos-anteriores/",
+  "exams": [
+    {
+      "year": 2017,
+      "shift": "diurno",
+      "status": "pending_import",
+      "questions_expected": 40
+    },
+    {
+      "year": 2018,
+      "shift": "diurno",
+      "status": "pending_import",
+      "questions_expected": 40
+    },
+    {
+      "year": 2019,
+      "shift": "diurno",
+      "status": "pending_import",
+      "questions_expected": 40
+    },
+    {
+      "year": 2020,
+      "shift": "diurno",
+      "status": "pending_import",
+      "questions_expected": 40
+    },
+    {
+      "year": 2021,
+      "shift": "diurno",
+      "status": "pending_import",
+      "questions_expected": 40
+    },
+    {
+      "year": 2022,
+      "shift": "diurno",
+      "status": "pending_import",
+      "questions_expected": 40
+    },
+    {
+      "year": 2023,
+      "shift": "diurno",
+      "status": "pending_import",
+      "questions_expected": 40
+    },
+    {
+      "year": 2024,
+      "shift": "diurno",
+      "status": "pending_import",
+      "questions_expected": 40
+    },
+    {
+      "year": 2025,
+      "shift": "diurno",
+      "status": "pending_import",
+      "questions_expected": 40
+    },
+    {
+      "year": 2026,
+      "shift": "diurno",
+      "status": "pending_import",
+      "questions_expected": 40
+    },
+    {
+      "year": 2019,
+      "shift": "noturno",
+      "status": "pending_import"
+    },
+    {
+      "year": 2018,
+      "shift": "noturno",
+      "edition": "2",
+      "status": "pending_import"
+    },
+    {
+      "year": 2018,
+      "shift": "noturno",
+      "edition": "1",
+      "status": "pending_import"
+    },
+    {
+      "year": 2017,
+      "shift": "noturno",
+      "status": "pending_import"
+    },
+    {
+      "year": 2016,
+      "shift": "noturno",
+      "status": "pending_import"
+    },
+    {
+      "year": 2015,
+      "shift": "noturno",
+      "status": "pending_import"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+"use client"; import {useEffect,useState} from "react";
+export default function Timer(){const [s,setS]=useState(4*3600);useEffect(()=>{const i=setInterval(()=>setS(x=>Math.max(0,x-1)),1000);return()=>clearInterval(i)},[]);return <span className="timer">{String(Math.floor(s/3600)).padStart(2,"0")}:{String(Math.floor(s%3600/60)).padStart(2,"0")}:{String(s%60).padStart(2,"0")}</span>}
