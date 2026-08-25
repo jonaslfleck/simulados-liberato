@@ -1,1 +1,3 @@
-import Nav from "../../../components/Nav";import ExamRunner from "../../../components/ExamRunner";export default function Page(){return <><Nav/><ExamRunner/></>}
+import Nav from "../../../components/Nav";import Link from "next/link";import { getExamQuestions } from "../../../lib/questions";
+export const dynamic="force-dynamic";
+export default async function Page({params}:{params:Promise<{id:string}>}){const {id}=await params;let qs:any[]=[];let error="";try{qs=await getExamQuestions(id)}catch(e:any){error=e.message}return <><Nav/><main className="container"><h1>Simulado</h1>{error?<div className="card">Erro: {error}</div>:qs.length===0?<div className="card">Nenhuma questão publicada para esta prova.</div>:<div className="card"><p><b>{qs.length} questões carregadas do Supabase.</b></p><Link className="btn" href={`/simulado/${id}/questoes`}>Começar questões</Link></div>}</main></>}

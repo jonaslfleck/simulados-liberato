@@ -1,74 +1,59 @@
-# Simulados Liberato V5
+# Simulados Liberato V7 — Importador de PDFs
 
-## Versão pronta para integração
+A V7 implementa um pipeline executável para importar o acervo de PDFs da página oficial da Fundação Liberato.
 
-A V5 consolida o MVP e adiciona a preparação para produção:
+## Fonte
+O importador começa pela página oficial de provas e gabaritos e descobre os links PDF disponíveis.
 
-- `.gitignore` seguro para Node, Next.js, dados importados e variáveis;
-- cliente Supabase;
-- funções para buscar provas e questões publicadas;
-- políticas iniciais de Row Level Security;
-- script de verificação da estrutura;
-- pipeline V1–V4 mantido;
-- separação entre acervo extraído e acervo publicado;
-- preparação para GitHub + Vercel + Supabase.
-
-## Instalação local
+## Configuração
+Copie:
 
 ```bash
-npm install
-copy .env.example .env.local
+copy .env.import.example .env.import
 ```
 
-Preencha `.env.local`:
+Preencha somente para upload:
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=...
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...
+SUPABASE_URL=https://SEU-PROJETO.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=...
 ```
 
-Depois:
+A `SERVICE_ROLE_KEY` é usada somente pelo script local de importação. Nunca coloque essa chave na Vercel ou no frontend.
 
-```bash
-npm run dev
-```
-
-## Supabase
-
-Execute no SQL Editor, nesta ordem:
-
-1. `supabase/schema.sql`
-2. `supabase/schema_v2.sql`
-3. `supabase/rls.sql`
-
-## Teste
-
-```bash
-python scripts/ci-check.py
-npm run build
-```
-
-## Publicação
-
-1. Suba o projeto para um repositório GitHub.
-2. Importe o repositório na Vercel.
-3. Configure `NEXT_PUBLIC_SUPABASE_URL`.
-4. Configure `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
-5. Faça o deploy.
-
-## Importação do acervo
-
-O processamento dos PDFs deve ocorrer fora do frontend:
+## Importar PDFs
 
 ```bash
 pip install -r requirements.txt
-python scripts/importer/import_liberato.py --download
-python scripts/importer/import_liberato.py --parse
-python scripts/importer/build_review_queue.py
+python scripts/importer/v7_import_all.py --download
+python scripts/importer/v7_import_all.py --parse
 ```
 
-Revise os resultados antes de publicar no banco.
+Ou:
 
-## Segurança
+```bash
+python scripts/importer/v7_import_all.py --all
+```
 
-Nunca envie `.env.local`, chaves secretas ou `service_role` ao GitHub. Para o navegador use somente a URL do projeto e a Publishable Key com RLS corretamente configurado.
+## Validar uma prova
+
+```bash
+python scripts/importer/v7_validate.py data/extracted/ARQUIVO.json
+```
+
+## Enviar prova revisada ao Supabase
+
+```bash
+python scripts/importer/v7_upload_supabase.py data/extracted/ARQUIVO.json
+```
+
+Ela entra como `review`.
+
+Após conferir no banco, publique:
+
+```bash
+python scripts/importer/v7_upload_supabase.py data/extracted/ARQUIVO.json --publish
+```
+
+## Observação
+O parser automático não deve ser considerado perfeito para PDFs com imagens, tabelas, fórmulas ou layouts complexos. Revise antes de publicar.
