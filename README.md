@@ -1,30 +1,30 @@
-# V8 — Importação pelo app
+# Simulados Liberato V8 Corrigido
 
-## Novo painel
-`/admin/importar`
+## Correções
+- JSX da tela de importação corrigido.
+- Tratamento de respostas HTML/404/500 da API corrigido.
+- Processador de PDF trocado para `pdfjs-dist`, mais compatível com rotas Node do Next.js/Vercel.
+- Validação do arquivo baixado: precisa começar com `%PDF-`.
+- Mensagens HTTP mais claras.
+- Validação e logs da gravação no Supabase.
+- Service Role usada apenas no endpoint do servidor.
 
-1. Informe a URL de um PDF oficial.
-2. O backend baixa e extrai o texto.
-3. O app separa questões e alternativas.
-4. Revise/edite na tela.
-5. Salve como `review` ou publique.
-6. A prova publicada aparece em `/simulados`.
-
-## Variáveis Vercel
-
-Frontend:
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
-
-Somente servidor:
-- `SUPABASE_SERVICE_ROLE_KEY`
-
-A Service Role Key nunca deve começar com `NEXT_PUBLIC_` e não deve ser exposta no navegador.
-
-## Dependência adicional
+## Instalação
 ```bash
-npm install pdf-parse
+npm install
+npm run build
 ```
 
-## Limites
-O processamento é feito por requisição. PDFs muito grandes ou com layout complexo podem falhar; nesse caso use o importador Python da V7.
+## Dependências
+O projeto usa `pdfjs-dist`. As demais dependências do projeto permanecem.
+
+## Vercel
+Configure:
+- NEXT_PUBLIC_SUPABASE_URL
+- NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+- SUPABASE_SERVICE_ROLE_KEY
+
+Depois faça redeploy.
+
+## Importação
+Acesse `/admin/importar`, informe uma URL HTTPS direta para um PDF e processe. Revise o conteúdo e salve primeiro como `review`.
